@@ -18,15 +18,23 @@ with open('cidadedistancia.csv', 'r') as csvfile:
 cidadeDistancia = sorted(cidadeDistancia, key=lambda cidadeDistancia: cidadeDistancia[0])
 
 # cria grafo
-FG = nx.Graph()
+G = nx.Graph()
 
 # adiciona vértices e arestas a partir do arquivo
-FG.add_weighted_edges_from(cidadeDistancia)
+G.add_weighted_edges_from(cidadeDistancia)
 
 # mostra valores de vértices e pesos das arestas
-for (u, v, wt) in FG.edges.data('weight'):
+sum_weight = 0
+for (u, v, wt) in G.edges.data('weight'):
+    sum_weight += wt
     print(f"({u}, {v}, {wt})")
+print(f'{sum_weight:.2f}')
 
 # printa grafo
-nx.draw(FG, with_labels=True, font_weight='bold')
+pos=nx.spring_layout(G) 
+nx.draw_networkx(G,pos)
+labels = nx.get_edge_attributes(G,'weight')
+nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
 plt.show()
+
+
