@@ -17,10 +17,28 @@ with open('cidadedistancia.csv', 'r') as csvfile:
 # ordena o dict pela menor distância
 cidadeDistancia = sorted(cidadeDistancia, key=lambda cidadeDistancia: cidadeDistancia[0])
 
+def kruskal(grafo):
+    # arvore geradaora miníma a retornar após aplicar o algoritmo de kruskal
+    arvore = dict()
+
+    # ordena o grafo pela distância
+    grafo = sorted(G.edges.data('weight'), key=lambda cidadeDistancia: cidadeDistancia[2])
+
+    # percorrer grafo com (origem, destino, distância) ordenado do menor para maior
+
+    # marcar vertices com conexões
+
+    # se vertice atual, não tiver a mesma marcação na origem e destino, pode se juntar
+
+
+
+
+
 # cria grafo
 G = nx.Graph()
 
 # adiciona vértices e arestas a partir do arquivo
+# subtituir cidadeDistancia pelo retorno do método de kruskal
 G.add_weighted_edges_from(cidadeDistancia)
 
 # mostra valores de vértices e pesos das arestas
@@ -36,5 +54,3 @@ nx.draw_networkx(G,pos)
 labels = nx.get_edge_attributes(G,'weight')
 nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
 plt.show()
-
-
