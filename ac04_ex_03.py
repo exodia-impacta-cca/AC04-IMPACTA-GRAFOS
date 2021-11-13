@@ -1,5 +1,7 @@
 import networkx as nx
 import matplotlib.pyplot as plt
+from networkx.algorithms.bipartite.basic import color
+from networkx.algorithms.distance_measures import center
 
 # Quantidade de cidades diferentes = 9
 # Quantidade de arestas que tem que dar = 8
@@ -57,10 +59,20 @@ def desenhaGrafoComPeso(listaCidadeDistancia):
         print(f"({u}, {v}, {wt})")
     print(f'{sum_weight:.2f}')
     # printa grafo
+    options = {
+        "font_size": 24,
+        "node_size": 3000,
+        "node_color": "white",
+        "edgecolors": "black",
+        "linewidths": 5,
+        "width": 5,
+    }
+    peso_total = f'Peso total: {sum_weight:.2f}'
     pos=nx.spring_layout(G) 
     nx.draw_networkx(G,pos)
     labels = nx.get_edge_attributes(G,'weight')
     nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
+    plt.text(0.15, 1, peso_total, color = 'black', size = 24)
     plt.show()
 
 

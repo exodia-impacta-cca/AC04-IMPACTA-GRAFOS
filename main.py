@@ -8,5 +8,6 @@ grafo = criaGrafoDict(distanc)
 arvore_geradora_minima = kruskal(grafo)
 print(arvore_geradora_minima)
 
-desenhaGrafo(arvore_geradora_minima)
-desenhaGrafo(distanc)
+
+desenhaGrafoComPeso(distanc)
+desenhaGrafoComPeso(arvore_geradora_minima)

@@ -29,7 +29,7 @@ def ordena_arestas(grafo):
     arestas_ordenadas = []
     for u,vizinhos in grafo.items():
         for v,peso in vizinhos.items():
-            arestas_ordenadas.append(tuple([u, v]))
+            arestas_ordenadas.append(tuple([u, v, peso]))
     quicksort(arestas_ordenadas,0,len(arestas_ordenadas)-1)
     return arestas_ordenadas
 
