@@ -18,60 +18,34 @@ def leCsvCriaListaDistancias(caminhoArquivo):
     return cidadeDistancia
 
 
-def criaGrafoList(listaDistancias):
-    grafo = dict()
-    visitados = dict()
-    for distanc in listaDistancias:
-        if distanc[0] not in grafo.keys():
-            grafo[distanc[0]] = [[distanc[1], distanc[2]]]
-        else:
-            l = [x for x in grafo[distanc[0]]]
-            l.append([distanc[1], distanc[2]])
-            grafo[distanc[0]] = l
-            #a1, a2 = grafo[distanc[0]][0], grafo[distanc[0]][1]
-            #grafo[distanc[0]] = [a1, a2, distanc[1], distanc[2]]
-
-    #     # origem destino distancia  # distancia0 destino1 origem2
-    # for distanc in listaDistancias:
-    #     #distanc = distanc[::-1]
-    #     if distanc[1] not in grafo.keys():
-    #         grafo[distanc[1]] = [distanc[0], distanc[2]]
-    #     else:
-    #         l = [x for x in grafo[distanc[2]]]
-    #         grafo[distanc[1]] = [l, distanc[1], distanc[0]]
-    #         #a1, a2 = grafo[distanc[2]][0], grafo[distanc[2]][1]
-    #         #grafo[distanc[1]] = [a1, a2, distanc[1], distanc[0]]
-    return grafo
-
 
 def criaGrafoDict(listaDistancias):
     grafo = dict()
     for distanc in listaDistancias:
         #  origem[0], destino[1] distancia [2] 
         if distanc[0] not in grafo.keys():
-            grafo[distanc[0]] = []
+            grafo[distanc[0]] = {}
             v = {distanc[1]:distanc[2]}
             grafo[distanc[0]] = v
         else:
-            antes =  grafo[distanc[0]]
-            v = {distanc[1]:distanc[2]}
-            grafo[distanc[0]] = antes, v
+            antes = grafo[distanc[0]]
+            antes[distanc[1]] = distanc[2]
+            grafo[distanc[0]] = antes
 
-        #  origem[0], destino[1] distancia [2] 
         if distanc[1] not in grafo.keys():
-            grafo[distanc[1]] = []
+            grafo[distanc[1]] = {}
             v = {distanc[0]:distanc[2]}
             grafo[distanc[1]] = v
         else:
-            antes =  grafo[distanc[1]]
-            v = {distanc[0]:distanc[2]}, antes
-            grafo[distanc[1]] = v
+            antes = grafo[distanc[1]]
+            antes[distanc[0]] = distanc[2]
+            grafo[distanc[1]] = antes
 
     return grafo
 
 
 
-def desenhaGrafo(listaCidadeDistancia):
+def desenhaGrafoComPeso(listaCidadeDistancia):
     # cria grafo
     G = nx.Graph()
     # adiciona vértices e arestas a partir do arquivo
@@ -87,4 +61,26 @@ def desenhaGrafo(listaCidadeDistancia):
     nx.draw_networkx(G,pos)
     labels = nx.get_edge_attributes(G,'weight')
     nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
+    plt.show()
+
+
+def desenhaGrafo(listaCidadeDistancia):
+    import networkx as nx
+    import matplotlib.pyplot as plt
+    g = nx.Graph()
+    for edge in listaCidadeDistancia:
+        g.add_edge(edge[0], edge[1])
+    options = {
+        "font_size": 24,
+        "node_size": 3000,
+        "node_color": "white",
+        "edgecolors": "black",
+        "linewidths": 5,
+        "width": 5,
+    }
+    nx.draw_networkx(g, **options)
+    # Set margins for the axes so that nodes aren't clipped
+    ax = plt.gca()
+    ax.margins(0.05)
+    plt.axis("off")
     plt.show()
