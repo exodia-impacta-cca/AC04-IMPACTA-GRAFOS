@@ -18,7 +18,7 @@ def leCsvCriaListaDistancias(caminhoArquivo):
     return cidadeDistancia
 
 
-def criaGrafoDict(listaDistancias):
+def criaGrafoList(listaDistancias):
     grafo = dict()
     visitados = dict()
     for distanc in listaDistancias:
@@ -42,6 +42,34 @@ def criaGrafoDict(listaDistancias):
     #         #a1, a2 = grafo[distanc[2]][0], grafo[distanc[2]][1]
     #         #grafo[distanc[1]] = [a1, a2, distanc[1], distanc[0]]
     return grafo
+
+
+def criaGrafoDict(listaDistancias):
+    grafo = dict()
+    for distanc in listaDistancias:
+        #  origem[0], destino[1] distancia [2] 
+        if distanc[0] not in grafo.keys():
+            grafo[distanc[0]] = []
+            v = {distanc[1]:distanc[2]}
+            grafo[distanc[0]] = v
+        else:
+            antes =  grafo[distanc[0]]
+            v = {distanc[1]:distanc[2]}
+            grafo[distanc[0]] = antes, v
+
+        #  origem[0], destino[1] distancia [2] 
+        if distanc[1] not in grafo.keys():
+            grafo[distanc[1]] = []
+            v = {distanc[0]:distanc[2]}
+            grafo[distanc[1]] = v
+        else:
+            antes =  grafo[distanc[1]]
+            v = {distanc[0]:distanc[2]}, antes
+            grafo[distanc[1]] = v
+
+    return grafo
+
+
 
 def desenhaGrafo(listaCidadeDistancia):
     # cria grafo
