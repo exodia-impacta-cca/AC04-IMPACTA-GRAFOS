@@ -1,11 +1,17 @@
+from ac04_ex_03 import *
+
 grafo = {
-    'a': {'b': 0, 'd': 1, 'e': 2},
-    'b': {'a': 0, 'c': 4, 'e': 5},
-    'c': {'b': 4, 'e': 7},
-    'd': {'a': 1, 'e': 9},
-    'e': {'a': 2, 'b': 5, 'c': 7, 'd': 9, 'f': 14},
-    'f': {'e': 14}
+    'Bauru': {'Sao Carlos': 174.6, 'Sao Paulo': 178.3, 'Campinas': 261.6},
+    'Campinas': {'Indaiatuba': 28.6, 'Sorocaba': 88.9, 'Itapevi': 98.0, 'Bauru': 261.6},
+    'Itapevi': {'Sorocaba': 73.6, 'Campinas': 98.0},
+    'Osasco': {'Indaiatuba': 100.0, 'Sao Paulo': 21.7},
+    'Registro': {'Campinas': 259.1, 'Sorocaba': 160.5, 'Sao Paulo': 191.9},
+    'Sao Carlos': {'Campinas': 146.2, 'Bauru': 174.6, 'Sao Paulo': 315.6 },
+    'Sao Paulo': {'Sorocaba': 99.0, 'Indaiatuba': 103.4, 'Sao Carlos': 315.6, 'Registro': 191.9, 'Osasco': 21.7},
+    'Sorocaba': {'Campinas': 88.9, 'Indaiatuba': 65.7, 'Sao Paulo': 99.0, 'Registro': 160.5, 'Itapevi': 73.6},
+    'Indaiatuba': {'Campinas': 28.6, 'Osasco': 100.0, 'Sao Paulo': 103.4, 'Sorocaba': 65.7}
 }
+
 
 def quicksort(vetor,inicio,fim):
     if(inicio < fim):
@@ -67,6 +73,6 @@ def kruskal(grafo):
 
 
 
+# arvore_geradora_minima = kruskal(grafo)
+# print(arvore_geradora_minima)
 
-arvore_geradora_minima = kruskal(grafo)
-print(arvore_geradora_minima)
