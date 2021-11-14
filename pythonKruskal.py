@@ -6,9 +6,9 @@ grafo = criaGrafoDict(leCsvCriaListaDistancias(csv))
 
 def quicksort(vetor,inicio,fim):
     if(inicio < fim):
-        q = pQSort(vetor,inicio,fim) #q[0] = pivo; q[1] = inicio; q[2] = fim
-        quicksort(vetor, q[1],q[0]-1) #(vetor, inicio, pivo-1)
-        quicksort(vetor, q[0]+1,q[2]) #(vetor, pivo+1, fim)
+        q = pQSort(vetor,inicio,fim) 
+        quicksort(vetor, q[1],q[0]-1) 
+        quicksort(vetor, q[0]+1,q[2])
 
 def pQSort(vetor,inicio,fim):
     pivo = vetor[fim]
